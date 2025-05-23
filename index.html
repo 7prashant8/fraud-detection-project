@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Payment Fraud Detector</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    h2 {
+      font-weight: 700;
+      margin-bottom: 25px;
+      font-size: 2rem;
+      letter-spacing: 1.2px;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    input[type="number"] {
+      padding: 10px 15px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+      outline: none;
+      transition: box-shadow 0.3s ease;
+    }
+    input[type="number"]:focus {
+      box-shadow: 0 0 8px 3px #a78bfa;
+      background-color: #fefefe;
+      color: #333;
+    }
+    button {
+      padding: 15px;
+      background: #9f7aea;
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 15px #7c3aed;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    button:hover {
+      background: #7c3aed;
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px #5a2abf;
+    }
+    button:active {
+      transform: scale(0.95);
+    }
+    h3 {
+      margin-top: 30px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #fbc02d;
+      min-height: 2em;
+      animation: fadeInText 0.8s ease forwards;
+      opacity: 0;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeInText {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Payment Fraud Detector</h2>
+    <form method="POST" action="/predict" autocomplete="off">
+      <input type="number" name="val1" placeholder="time" step="any" required />
+      <input type="number" name="val2" placeholder="Value 1" step="any" required />
+      <input type="number" name="val3" placeholder="Value 2" step="any" required />
+      <input type="number" name="val4" placeholder="Value 3" step="any" required />
+      <input type="number" name="val5" placeholder="Value 4" step="any" required />
+      <input type="number" name="val6" placeholder="Value 5" step="any" required />
+      <input type="number" name="val7" placeholder="Value 6" step="any" required />
+      <input type="number" name="val8" placeholder="Value 7" step="any" required />
+      <input type="number" name="val9" placeholder="Value 8" step="any" required />
+      <input type="number" name="val10" placeholder="Value 9" step="any" required />
+      <input type="number" name="val11" placeholder="Value 10" step="any" required />
+      <input type="number" name="val12" placeholder="Value 11" step="any" required />
+      <input type="number" name="val13" placeholder="Value 12" step="any" required />
+      <input type="number" name="val14" placeholder="Value 13" step="any" required />
+      <input type="number" name="val15" placeholder="Value 14" step="any" required />
+      <input type="number" name="val16" placeholder="Value 15" step="any" required />
+      <input type="number" name="val17" placeholder="Value 16" step="any" required />
+      <input type="number" name="val18" placeholder="Value 17" step="any" required />
+      <input type="number" name="val19" placeholder="Value 18" step="any" required />
+      <input type="number" name="val20" placeholder="Value 19" step="any" required />
+      <input type="number" name="val21" placeholder="Value 20" step="any" required />
+      <input type="number" name="val22" placeholder="Value 21" step="any" required />
+      <input type="number" name="val23" placeholder="Value 22" step="any" required />
+      <input type="number" name="val24" placeholder="Value 23" step="any" required />
+      <input type="number" name="val25" placeholder="Value 24" step="any" required />
+      <input type="number" name="val26" placeholder="Value 25" step="any" required />
+      <input type="number" name="val27" placeholder="Value 26" step="any" required />
+      <input type="number" name="val28" placeholder="Value 27" step="any" required />
+      <input type="number" name="val29" placeholder="Value 28" step="any" required />
+      <input type="number" name="val30" placeholder="amount" step="any" required />
+      <input type="hidden" name="data" id="hiddenData">
+      <button type="submit" onclick="combineValues()">Check</button>
+    </form>
+    <h3>{{ prediction }}</h3>
+  </div>
+
+  <script>
+    function combineValues() {
+      const vals = [
+        document.querySelector('[name="val1"]').value,
+        document.querySelector('[name="val2"]').value,
+        document.querySelector('[name="val3"]').value,
+        document.querySelector('[name="val4"]').value,
+        document.querySelector('[name="val5"]').value,
+        document.querySelector('[name="val6"]').value,
+        document.querySelector('[name="val7"]').value,
+        document.querySelector('[name="val8"]').value,
+        document.querySelector('[name="val9"]').value,
+        document.querySelector('[name="val10"]').value,
+        document.querySelector('[name="val11"]').value,
+        document.querySelector('[name="val12"]').value,
+        document.querySelector('[name="val13"]').value,
+        document.querySelector('[name="val14"]').value,
+        document.querySelector('[name="val15"]').value,
+        document.querySelector('[name="val16"]').value,
+        document.querySelector('[name="val17"]').value,
+        document.querySelector('[name="val18"]').value,
+        document.querySelector('[name="val19"]').value,
+        document.querySelector('[name="val20"]').value,
+        document.querySelector('[name="val21"]').value,
+        document.querySelector('[name="val22"]').value,
+        document.querySelector('[name="val23"]').value,
+        document.querySelector('[name="val24"]').value,
+        document.querySelector('[name="val25"]').value,
+        document.querySelector('[name="val26"]').value,
+        document.querySelector('[name="val27"]').value,
+        document.querySelector('[name="val28"]').value,
+        document.querySelector('[name="val29"]').value,
+        document.querySelector('[name="val30"]').value
+      ];
+      document.getElementById('hiddenData').value = vals.join(',');
+    }
+  </script>
+</body>
+</html>
